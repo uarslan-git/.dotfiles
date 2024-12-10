@@ -51,6 +51,7 @@ foreach ($program in $programs) {
 # Symlink specified files to their target locations
 $filesToLink = @(
     @{ Source = "$HOME/.dotfiles/windows/glaze/config.yaml"; Target = "$HOME/.glzr/glazewm/config.yaml" }
+    @{ Source = "$HOME/.dotfiles/windows/powershell/Microsoft.PowerShell_profile.ps1"; Target = "$HOME/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1" }
 )
 
 foreach ($file in $filesToLink) {
