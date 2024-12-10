@@ -1,3 +1,24 @@
+if (!
+    #current role
+    (New-Object Security.Principal.WindowsPrincipal(
+        [Security.Principal.WindowsIdentity]::GetCurrent()
+    #is admin?
+    )).IsInRole(
+        [Security.Principal.WindowsBuiltInRole]::Administrator
+    )
+) {
+    #elevate script and exit current non-elevated runtime
+    Start-Process `
+        -FilePath 'powershell' `
+        -ArgumentList (
+            #flatten to single array
+            '-File', $MyInvocation.MyCommand.Source, $args `
+            | %{ $_ }
+        ) `
+        -Verb RunAs
+    exit
+}
+
 # Define a list of programs to install
 $programs = @(
     "Git.Git"                    
@@ -12,6 +33,7 @@ $programs = @(
     "Docker.DockerDesktop"
     "Microsoft.VisualStudioCode"
     "Neovim.Neovim"
+    "glzr-io.glazewm"
 )
 
 # Loop through the list and install each program
@@ -28,9 +50,7 @@ foreach ($program in $programs) {
 
 # Symlink specified files to their target locations
 $filesToLink = @(
-  #  @{ Source = "$HOME/.dotfiles/windows/.glzwm/glaze/config.yaml"; Target = "$HOME/.glzwm/config.yaml" },
-   # @{ Source = "$HOME/.dotfiles/windows/.bashrc"; Target = "$HOME/.bashrc" },
-    @{ Source = "$HOME/.dotfiles/windows/testi.txt"; Target = "$HOME/.vimrc" }
+    @{ Source = "$HOME/.dotfiles/windows/glaze/config.yaml"; Target = "$HOME/.glzr/glazewm/config.yaml" }
 )
 
 foreach ($file in $filesToLink) {
