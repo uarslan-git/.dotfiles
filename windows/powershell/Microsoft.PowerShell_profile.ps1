@@ -3,7 +3,10 @@ Import-Module -Name Posh-Git
 Import-Module -Name PSReadline
 oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\clean-detailed.omp.json" | Invoke-Expression
 
-#Remove prior aliases
+Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -EditMode Windows
+Set-PSReadLineOption -BellStyle None  # Disable beep
 
 # Aliases
 Set-Alias nf neofetch
@@ -13,7 +16,7 @@ Function admin { Start-Process powershell -Verb runAs }
 Function e { explorer . }
 Function dfs { Set-Location "$HOME\.dotfiles" }
 Function gita { git add $args }
-Function gitc { git commit -m $args}
+Function gitc { git commit -m $args }
 Function gitcm { 
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     git commit -m $timestamp
@@ -21,14 +24,14 @@ Function gitcm {
 Function gitp { git push }
 
 Function backup {
-dfs
-    gita .
+    dfs
+    gita . 
     gitcm
     gitp
 }
 
 Function sd {
-	backup
+    backup
     param(
         [int]$hours
     )
@@ -44,4 +47,8 @@ Function sdc {
     Write-Host "Cancelling scheduled shutdown..."
     Shutdown.exe /a
 }
+
+# Enable Tab Completion for Files & Directories
+Set-PSReadLineKeyHandler -Chord Tab -Function Complete
+Set-PSReadLineKeyHandler -Chord Shift+Tab -Function Complete  # For backward cycling
 
