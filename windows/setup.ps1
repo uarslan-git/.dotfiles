@@ -28,11 +28,14 @@ $programs = @(
     "JetBrains.IntelliJIDEA.Ultimate" 
     "Microsoft.PowerShell"       
     "7zip.7zip"                  
+    "JetBrains.Toolbox"                  
+    "Microsoft.VisualStudio.2022.Community"                  
     "OpenJS.Node.js"             
-    "Microsoft.VisualStudio.Enterprise" 
     "Docker.DockerDesktop"
     "Microsoft.VisualStudioCode"
     "Neovim.Neovim"
+    "JanDeDobbeleer.OhMyPosh"
+    "wez.wezterm"
     "glzr-io.glazewm"
 )
 
