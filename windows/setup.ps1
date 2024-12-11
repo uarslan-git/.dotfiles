@@ -19,7 +19,7 @@ if (!
     exit
 }
 
-# Define a list of programs to install
+# Define a list of programs to install via winget
 $programs = @(
     "Git.Git"                    
     "Node.js.LTS"                
@@ -40,7 +40,7 @@ $programs = @(
     "Microsoft.PowerToys"
 )
 
-# Loop through the list and install each program
+# Loop through the list and install each program via winget
 foreach ($program in $programs) {
     Write-Host "Installing ${program}..." -ForegroundColor Green
     try {
@@ -49,6 +49,26 @@ foreach ($program in $programs) {
         Write-Host "${program} installed successfully." -ForegroundColor Cyan
     } catch {
         Write-Host "Failed to install ${program}: $_" -ForegroundColor Red
+    }
+}
+
+# Define a list of PowerShell modules to install
+$modules = @(
+    "Terminal-Icons",
+        "Posh-Git",
+    "PSReadline",
+    "Microsoft.PowerShell.SecretManagement",
+    "Microsoft.PowerShell.SecretStore"
+)
+
+# Install each module from PSGallery
+foreach ($module in $modules) {
+    Write-Host "Installing PowerShell module ${module}..." -ForegroundColor Green
+    try {
+        Install-Module -Name $module -Repository PSGallery -Force -AllowClobber -Scope CurrentUser
+        Write-Host "${module} installed successfully." -ForegroundColor Cyan
+    } catch {
+        Write-Host "Failed to install ${module}: $_" -ForegroundColor Red
     }
 }
 
@@ -90,4 +110,3 @@ foreach ($file in $filesToLink) {
 # Pause the script to view errors or output
 Write-Host "Press Enter to exit"
 Read-Host
-
