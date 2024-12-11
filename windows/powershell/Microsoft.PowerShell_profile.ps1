@@ -13,6 +13,7 @@ Set-Alias nf neofetch
 Set-Alias n nvim
 Set-Alias vim nvim
 Function admin { Start-Process powershell -Verb runAs }
+Function u { & $HOME/.dotfiles/windows/setup.ps1}
 Function e { explorer . }
 Function dfs { Set-Location "$HOME\.dotfiles" }
 Function gita { git add $args }
