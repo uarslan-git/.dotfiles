@@ -34,14 +34,19 @@ Function backup {
 Function sd {
     backup
     param(
-        [int]$hours
+        [int]$hours = 0  # Default value of 0 for immediate shutdown
     )
     
-    $shutdownTime = (Get-Date).AddHours($hours)
-    $shutdownTimeFormatted = $shutdownTime.ToString("HH:mm:ss")
-    
-    Write-Host "Shutting down in $hours hours at $shutdownTimeFormatted..."
-    Shutdown.exe /s /f /t ($hours * 3600)
+    if ($hours -eq 0) {
+        Write-Host "Shutting down now..."
+        Shutdown.exe /s /f /t 0
+    } else {
+        $shutdownTime = (Get-Date).AddHours($hours)
+        $shutdownTimeFormatted = $shutdownTime.ToString("HH:mm:ss")
+        
+        Write-Host "Shutting down in $hours hours at $shutdownTimeFormatted..."
+        Shutdown.exe /s /f /t ($hours * 3600)
+    }
 }
 
 Function sdc {
