@@ -37,6 +37,7 @@ $programs = @(
     "JanDeDobbeleer.OhMyPosh"
     "wez.wezterm"
     "glzr-io.glazewm"
+    "Microsoft.PowerToys"
 )
 
 # Loop through the list and install each program
