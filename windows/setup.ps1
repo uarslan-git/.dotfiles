@@ -57,6 +57,7 @@ $filesToLink = @(
     @{ Source = "$HOME/.dotfiles/windows/glaze/config.yaml"; Target = "$HOME/.glzr/glazewm/config.yaml" }
     @{ Source = "$HOME/.dotfiles/windows/powershell/Microsoft.PowerShell_profile.ps1"; Target = "$HOME/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1" }
     @{ Source = "$HOME/.dotfiles/windows/.wezterm.lua"; Target = "$HOME/.wezterm.lua" }
+    @{ Source = "$HOME/.dotfiles/windows/PowerToys/settings.ptb"; Target = "$HOME/PowerToys/Backup/settings.ptb" }
 )
 
 foreach ($file in $filesToLink) {
@@ -65,6 +66,13 @@ foreach ($file in $filesToLink) {
 
     Write-Host "Creating symlink for $sourcePath..." -ForegroundColor Green
     try {
+        # Ensure the target directory exists
+        $targetDirectory = [System.IO.Path]::GetDirectoryName($targetPath)
+        if (!(Test-Path -Path $targetDirectory)) {
+            Write-Host "Creating directory $targetDirectory..." -ForegroundColor Yellow
+            New-Item -ItemType Directory -Path $targetDirectory -Force | Out-Null
+        }
+
         # If the target already exists, remove it
         if (Test-Path -Path $targetPath) {
             Write-Host "Deleting existing file or symlink at $targetPath..." -ForegroundColor Yellow
@@ -82,3 +90,4 @@ foreach ($file in $filesToLink) {
 # Pause the script to view errors or output
 Write-Host "Press Enter to exit"
 Read-Host
+

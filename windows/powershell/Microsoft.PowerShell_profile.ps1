@@ -8,5 +8,6 @@ Set-Alias n nvim
 Set-Alias vim nvim
 Function e { explorer . }
 Function dfs { Set-Location "$HOME\.dotfiles" }
-Function ga { git add $args }
-Function gp { git push }
+Function gita { git add $args }
+Function gitc { git commit -m $args}
+Function gitp { git push }
