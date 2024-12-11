@@ -22,3 +22,21 @@ dfs
     gitcm
     gitp
 }
+
+Function sd {
+    param(
+        [int]$hours
+    )
+    
+    $shutdownTime = (Get-Date).AddHours($hours)
+    $shutdownTimeFormatted = $shutdownTime.ToString("HH:mm:ss")
+    
+    Write-Host "Shutting down in $hours hours at $shutdownTimeFormatted..."
+    Shutdown.exe /s /f /t ($hours * 3600)
+}
+
+Function sdc {
+    Write-Host "Cancelling scheduled shutdown..."
+    Shutdown.exe /a
+}
+
