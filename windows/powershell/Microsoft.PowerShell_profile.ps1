@@ -15,3 +15,10 @@ Function gitcm {
     git commit -m $timestamp
 }
 Function gitp { git push }
+
+Function backup {
+dfs
+    gita .
+    gitcm
+    gitp
+}
