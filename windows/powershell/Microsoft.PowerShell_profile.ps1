@@ -24,6 +24,7 @@ dfs
 }
 
 Function sd {
+	backup
     param(
         [int]$hours
     )
