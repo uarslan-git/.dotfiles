@@ -35,6 +35,8 @@ $programs = @(
     "Docker.DockerDesktop"
     "Microsoft.VisualStudioCode"
     "Neovim.Neovim"
+    "OpenVPNTechnologies.OpenVPN"
+    "Element.Element"
     "JanDeDobbeleer.OhMyPosh"
     "wez.wezterm"
     "glzr-io.glazewm"
@@ -77,6 +79,9 @@ foreach ($module in $modules) {
 # Remove Windows bloatware using winget
 $bloatware = @(
     "Microsoft.OneDrive",
+    "9NFTCH6J7FHV",
+    "9NBLGGH4R32N",
+    "9NRX63209R7B",
     "Microsoft.XboxApp",
     "Microsoft.XboxGameOverlay",
     "Microsoft.XboxGamingOverlay",
@@ -97,12 +102,12 @@ $bloatware = @(
 )
 
 foreach ($program in $bloatware) {
-    Write-Host "Installing ${program}..." -ForegroundColor Green
+    Write-Host "Uninstalling ${program}..." -ForegroundColor Green
     try {
-        winget remove --id "${program}" --silent --accept-source-agreements --accept-package-agreements
-        Write-Host "${program} installed successfully." -ForegroundColor Cyan
+        winget uninstall --id "${program}" --silent
+        Write-Host "${program} removed successfully." -ForegroundColor Yellow
     } catch {
-        Write-Host "Failed to install ${program}: $($_.Exception.Message)" -ForegroundColor Red
+        Write-Host "Failed to uninstall ${program}: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
 
