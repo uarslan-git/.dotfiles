@@ -1,17 +1,17 @@
 if (!
-    #current role
+    # current role
     (New-Object Security.Principal.WindowsPrincipal(
         [Security.Principal.WindowsIdentity]::GetCurrent()
-    #is admin?
+    # is admin?
     )).IsInRole(
         [Security.Principal.WindowsBuiltInRole]::Administrator
     )
 ) {
-    #elevate script and exit current non-elevated runtime
+    # elevate script and exit current non-elevated runtime
     Start-Process `
         -FilePath 'powershell' `
         -ArgumentList (
-            #flatten to single array
+            # flatten to single array
             '-File', $MyInvocation.MyCommand.Source, $args `
             | %{ $_ }
         ) `
@@ -22,6 +22,7 @@ if (!
 # Define a list of programs to install via winget
 $programs = @(
     "Git.Git"                    
+    "9PM5VM1S3VMQ"                    
     "Node.js.LTS"                
     "Python.Python.3"            
     "Microsoft.WindowsTerminal"  
@@ -46,18 +47,17 @@ $programs = @(
 foreach ($program in $programs) {
     Write-Host "Installing ${program}..." -ForegroundColor Green
     try {
-        # Explicitly use the current program name safely
         winget install --id "${program}" --silent --accept-source-agreements --accept-package-agreements
         Write-Host "${program} installed successfully." -ForegroundColor Cyan
     } catch {
-        Write-Host "Failed to install ${program}: $_" -ForegroundColor Red
+        Write-Host "Failed to install ${program}: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
 
 # Define a list of PowerShell modules to install
 $modules = @(
     "Terminal-Icons",
-        "Posh-Git",
+    "Posh-Git",
     "PSReadline",
     "Microsoft.PowerShell.SecretManagement",
     "Microsoft.PowerShell.SecretStore"
@@ -70,7 +70,39 @@ foreach ($module in $modules) {
         Install-Module -Name $module -Repository PSGallery -Force -AllowClobber -Scope CurrentUser
         Write-Host "${module} installed successfully." -ForegroundColor Cyan
     } catch {
-        Write-Host "Failed to install ${module}: $_" -ForegroundColor Red
+        Write-Host "Failed to install ${module}: $($_.Exception.Message)" -ForegroundColor Red
+    }
+}
+
+# Remove Windows bloatware using winget
+$bloatware = @(
+    "Microsoft.OneDrive",
+    "Microsoft.XboxApp",
+    "Microsoft.XboxGameOverlay",
+    "Microsoft.XboxGamingOverlay",
+    "Microsoft.YourPhone",
+    "Microsoft.ZuneMusic",
+    "Microsoft.ZuneVideo",
+    "Microsoft.BingWeather",
+    "Microsoft.WindowsAlarms",
+    "Microsoft.WindowsCamera",
+    "Microsoft.WindowsMaps",
+    "Microsoft.WindowsFeedbackHub",
+    "Microsoft.WindowsSoundRecorder",
+    "Microsoft.3DViewer",
+    "Microsoft.MixedReality.Portal",
+    "Microsoft.MicrosoftSolitaireCollection",
+    "Microsoft.People",
+    "Microsoft.SkypeApp"
+)
+
+foreach ($program in $bloatware) {
+    Write-Host "Installing ${program}..." -ForegroundColor Green
+    try {
+        winget remove --id "${program}" --silent --accept-source-agreements --accept-package-agreements
+        Write-Host "${program} installed successfully." -ForegroundColor Cyan
+    } catch {
+        Write-Host "Failed to install ${program}: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
 
@@ -105,10 +137,11 @@ foreach ($file in $filesToLink) {
         New-Item -ItemType SymbolicLink -Path $targetPath -Target $sourcePath
         Write-Host "Symlink created for $sourcePath." -ForegroundColor Cyan
     } catch {
-        Write-Host "Failed to create symlink for ${sourcePath}: $_" -ForegroundColor Red
+        Write-Host "Failed to create symlink for ${sourcePath}: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
 
 # Pause the script to view errors or output
 Write-Host "Press Enter to exit"
 Read-Host
+
