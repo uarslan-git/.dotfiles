@@ -38,6 +38,8 @@ $programs = @(
     "wez.wezterm"
     "glzr-io.glazewm"
     "Microsoft.PowerToys"
+    "Notion.NotionCalendar"
+    "Notion.Notion"
 )
 
 # Loop through the list and install each program via winget
