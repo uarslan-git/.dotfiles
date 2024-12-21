@@ -23,7 +23,8 @@ if (!
 $programs = @(
     "Git.Git"                    
     "9PM5VM1S3VMQ"                    
-    "Node.js.LTS"                
+    "Node.js.LTS"
+    "Brave.Brave"
     "RARLab.WinRAR"                
     "Python.Python.3"            
     "Microsoft.WindowsTerminal"  
