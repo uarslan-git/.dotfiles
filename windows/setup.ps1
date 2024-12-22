@@ -25,6 +25,7 @@ $programs = @(
     "9PM5VM1S3VMQ"                    
     "Node.js.LTS"
     "Brave.Brave"
+    "anki.anki"
     "RARLab.WinRAR"                
     "Python.Python.3"            
     "Microsoft.WindowsTerminal"  
