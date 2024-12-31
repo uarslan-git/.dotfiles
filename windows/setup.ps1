@@ -24,7 +24,9 @@ $programs = @(
     "Git.Git"                    
     "9PM5VM1S3VMQ"                    
     "Google.GoogleDrive"
+    "qBittorrent.qBittorrent"
     "MartinFinnerup.YouTubeMusicforDesktop"
+    "AppWork.JDownloader"
     "XP8K2L36VP0QMB"
     "Flow-Launcher.Flow-Launcher"
     "GitHub.cli"
@@ -156,6 +158,7 @@ foreach ($file in $filesToLink) {
 }
 
 # Pause the script to view errors or output
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 Write-Host "Press Enter to exit"
 Read-Host
 
