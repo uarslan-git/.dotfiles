@@ -25,6 +25,7 @@ $programs = @(
     "9PM5VM1S3VMQ"                    
     "Google.GoogleDrive"
     "AppWork.JDownloader"
+    "LocalSend.LocalSend"
     "qBittorrent.qBittorrent"
     "nepnep.neofetch-win"
     "MartinFinnerup.YouTubeMusicforDesktop"
