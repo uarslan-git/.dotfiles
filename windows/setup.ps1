@@ -27,6 +27,7 @@ $programs = @(
     "AppWork.JDownloader"
     "LocalSend.LocalSend"
     "qBittorrent.qBittorrent"
+    "GitHub.GitHubDesktop"
     "nepnep.neofetch-win"
     "MartinFinnerup.YouTubeMusicforDesktop"
     "XP8K2L36VP0QMB"
