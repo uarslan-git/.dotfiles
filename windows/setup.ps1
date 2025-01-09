@@ -24,6 +24,7 @@ $programs = @(
     "Git.Git"                    
     "9PM5VM1S3VMQ"                    
     "Google.GoogleDrive"
+    "OBSProject.OBSStudio"
     "AppWork.JDownloader"
     "LocalSend.LocalSend"
     "qBittorrent.qBittorrent"
