@@ -10,9 +10,6 @@ plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -31,13 +28,6 @@ setup_dev() {
         sed -i 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
     fi
 
-    # Install ASDF
-    if [[ ! -d "$HOME/.asdf" ]]; then
-        git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
-        echo -e '\n# ASDF\n. "$HOME/.asdf/asdf.sh"\n. "$HOME/.asdf/completions/asdf.bash"' >> ~/.zshrc
-        source ~/.zshrc
-    fi
-
     # Install zsh plugins
     local plugins_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins"
     mkdir -p "$plugins_dir"
@@ -51,22 +41,10 @@ setup_dev() {
     fi
 
     # Install programs in the list
-    local programs=(git curl docker neovim fzf nodejs python)
+    local programs=(git curl docker neovim fzf)
     for program in "${programs[@]}"; do
         if ! command -v "$program" &> /dev/null; then
-            case $program in
-                git | curl | docker)
-                    sudo apt-get install -y "$program" ;;
-                neovim)
-                    sudo apt-get install -y neovim ;;
-                fzf)
-                    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-                    ~/.fzf/install --all ;;
-                nodejs | python)
-                    asdf plugin add "$program" || true
-                    asdf install "$program" latest
-                    asdf global "$program" latest ;;
-            esac
+            sudo apt-get install -y "$program"
         fi
     done
 
@@ -76,12 +54,27 @@ setup_dev() {
         git clone --depth 1 https://github.com/wbthomason/packer.nvim "$packer_dir"
     fi
 
+    # Install brew and packages
+    if ! command -v brew &> /dev/null; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        echo 'eval "$($(brew --prefix)/bin/brew shellenv)"' >> ~/.zshrc
+        echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.zshrc
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    fi
+
+    local brew_packages=(bat fd ripgrep tmux htop)
+    for package in "${brew_packages[@]}"; do
+        if ! brew list "$package" &> /dev/null; then
+            brew install "$package"
+        fi
+    done
+
     echo "Development environment setup complete!" >&2
 }
 
 # Call the setup function only if the environment is not already set up
-if [[ ! -d "$HOME/.oh-my-zsh" || ! -d "$HOME/.asdf" || ! -d "$HOME/.fzf" ]]; then
-    setup_dev_env
+if [[ ! -d "$HOME/.oh-my-zsh" || ! -d "$HOME/.fzf" ]]; then
+    setup_dev
 fi
 
 # Aliases
@@ -102,7 +95,10 @@ alias vim="nvim"
 alias zshrc="vim ~/.zshrc"
 alias n="nvim"
 alias t="tmux"
+alias edit="vim ~/.zshrc"
 
 # Fix Powerlevel10k instant prompt warning
-#typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
+eval "$($(brew --prefix)/bin/brew shellenv)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
