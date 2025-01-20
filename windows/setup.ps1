@@ -33,6 +33,7 @@ $programs = @(
     "nepnep.neofetch-win"
     "MartinFinnerup.YouTubeMusicforDesktop"
     "XP8K2L36VP0QMB"
+    "OpenJS.NodeJS"
     "Flow-Launcher.Flow-Launcher"
     "GitHub.cli"
     "Node.js.LTS"
