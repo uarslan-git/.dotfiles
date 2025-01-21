@@ -41,7 +41,7 @@ setup_dev() {
     fi
 
     # Install programs in the list
-    local programs=(git curl docker neovim fzf)
+    local programs=(git curl docker neovim fzf nodejs npm python3-full)
     for program in "${programs[@]}"; do
         if ! command -v "$program" &> /dev/null; then
             sudo apt-get install -y "$program"
@@ -96,6 +96,7 @@ alias zshrc="vim ~/.zshrc"
 alias n="nvim"
 alias t="tmux"
 alias edit="vim ~/.zshrc"
+alias u="setup_dev"
 
 # Fix Powerlevel10k instant prompt warning
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
