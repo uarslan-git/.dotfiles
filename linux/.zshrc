@@ -44,7 +44,7 @@ setup_dev() {
     fi
 
     # Install programs in the list
-    local programs=(git curl docker neovim fzf nodejs npm python3-full)
+    local programs=(git curl docker neovim fzf nodejs wslu gh npm python3-full)
     for program in "${programs[@]}"; do
         if ! command -v "$program" &> /dev/null; then
             sudo apt-get install -y "$program"
@@ -76,7 +76,7 @@ setup_dev() {
 }
 
 # Call the setup function only if the environment is not already set up
-if [[ ! -d "$HOME/.oh-my-zsh" || ! -d "$HOME/.fzf" ]]; then
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
     setup_dev
 fi
 
