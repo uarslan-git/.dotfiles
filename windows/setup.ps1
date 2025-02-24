@@ -28,12 +28,14 @@ $programs = @(
     "AppWork.JDownloader"
     "LocalSend.LocalSend"
     "qBittorrent.qBittorrent"
+    "Unity.Unity.2023"
     "Python.Python.3.12"
     "GitHub.GitHubDesktop"
     "nepnep.neofetch-win"
     "MartinFinnerup.YouTubeMusicforDesktop"
     "XP8K2L36VP0QMB"
     "OpenJS.NodeJS"
+    "Notion.Notion"
     "Flow-Launcher.Flow-Launcher"
     "GitHub.cli"
     "Node.js.LTS"
@@ -60,7 +62,6 @@ $programs = @(
     "glzr-io.glazewm"
     "Microsoft.PowerToys"
     "Notion.NotionCalendar"
-    "Notion.Notion"
 )
 
 # Loop through the list and install each program via winget
