@@ -22,6 +22,7 @@ if (!
 # Define a list of programs to install via winget
 $programs = @(
     "Git.Git"                    
+    "SteffenBruentjen.EurKEY"
     "9PM5VM1S3VMQ"                    
     "Google.GoogleDrive"
     "OBSProject.OBSStudio"
