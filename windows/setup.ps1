@@ -37,7 +37,6 @@ $programs = @(
     "XP8K2L36VP0QMB"
     "OpenJS.NodeJS"
     "Notion.Notion"
-    "Flow-Launcher.Flow-Launcher"
     "GitHub.cli"
     "Node.js.LTS"
     "Discord.Discord"
