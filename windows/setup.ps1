@@ -181,8 +181,16 @@ Set-TimeZone -Id "W. Europe Standard Time"
 # Disable transparency effects
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "EnableTransparency" -Value 0
 
-# Disable animation effects
-Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\Animation" -Name "WindowAnimation" -Value 0
+# Disable animations
+Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Value "0" -Type String
+
+# Disable fade/slide animations
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewAlphaSelect" -Value 0
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewShadow" -Value 0
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Value 0
+
+# Disable menu fade or slide animations
+Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Value ([byte[]](0x90,0x12,0x03,0x80,0x10,0x00,0x00,0x00))
 
 #Disable Search in Taskbar
 Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Search\' -Name 'SearchboxTaskbarMode' -Value 0
@@ -207,4 +215,3 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\P
 Stop-Process -Name explorer -Force
 Write-Host "Press Enter to exit"
 Read-Host
-
