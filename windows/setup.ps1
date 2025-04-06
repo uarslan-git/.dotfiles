@@ -167,6 +167,26 @@ foreach ($file in $filesToLink) {
 
 # Pause the script to view errors or output
 powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+
+Set-Culture -CultureInfo "de-DE"
+Set-WinSystemLocale -SystemLocale "de-DE"
+#Set-WinUILanguageOverride -Language "de-DE"
+Set-WinHomeLocation -GeoId 94  # Germany
+
+# Set region settings to Germany
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "LocaleName" -Value "de-DE"
+Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "GeoName" -Value "DE"
+Set-TimeZone -Id "W. Europe Standard Time"
+
+# Disable transparency effects
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "EnableTransparency" -Value 0
+
+# Disable animation effects
+Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\Animation" -Name "WindowAnimation" -Value 0
+
+# Set dark mode for apps and system UI
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Value 0
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "SystemUsesLightTheme" -Value 0
 Write-Host "Press Enter to exit"
 Read-Host
 
