@@ -169,9 +169,9 @@ foreach ($file in $filesToLink) {
 powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 
 Set-Culture -CultureInfo "de-DE"
-Set-WinSystemLocale -SystemLocale "de-DE"
+#Set-WinSystemLocale -SystemLocale "de-DE"
 #Set-WinUILanguageOverride -Language "de-DE"
-Set-WinHomeLocation -GeoId 94  # Germany
+#Set-WinHomeLocation -GeoId 94  # Germany
 
 # Set region settings to Germany
 Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "LocaleName" -Value "de-DE"
@@ -184,9 +184,27 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\P
 # Disable animation effects
 Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\Animation" -Name "WindowAnimation" -Value 0
 
+#Disable Search in Taskbar
+Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Search\' -Name 'SearchboxTaskbarMode' -Value 0
+
+# Set taskbar icons to align to the left (instead of center)
+Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name "TaskbarAl" -Value 0
+
+# Disable Task View button
+Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name "ShowTaskViewButton" -Value 0
+
+# Disable Taskbar Badges
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarBadges" -Value 0
+
+# Disable taskbar on all displays
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskbarOnAllDisplays" -Value 0 -Force
+
 # Set dark mode for apps and system UI
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "AppsUseLightTheme" -Value 0
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "SystemUsesLightTheme" -Value 0
+
+# Restart taskbar
+Stop-Process -Name explorer -Force
 Write-Host "Press Enter to exit"
 Read-Host
 
