@@ -76,6 +76,7 @@ $programs = @(
 		"OpenJS.NodeJS"
 		"Notion.Notion"
 		"GitHub.cli"
+		"CondaForge.Miniforge3"
 		"Node.js.LTS"
 		"Discord.Discord"
 		"Brave.Brave"
