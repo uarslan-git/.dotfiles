@@ -26,11 +26,20 @@ function ApplySystemTweaks {
 	    Get-AppxPackage -Name "MicrosoftWindows.Client.WebExperience" | Remove-AppxPackage
 
 
-	    Set-Culture -CultureInfo "de-DE"
+# Disable automatic time synchronization
+		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\W32Time\Parameters" -Name "Type" -Value "NoSync"
+		Stop-Service w32time
+		Set-Service w32time -StartupType Disabled
+
+	    Set-Culture -CultureInfo "en-US"
 	    Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "LocaleName" -Value "en-US"
 	    Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "GeoName" -Value "US"
 	    Set-TimeZone -Id "W. Europe Standard Time"
 		Set-WinHomeLocation -GeoId 94
+		# Enable automatic time synchronization
+		Set-Service w32time -StartupType Automatic
+		Start-Service w32time
+		Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\W32Time\Parameters" -Name "Type" -Value "NTP"
 
 	    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "EnableTransparency" -Value 0
 	    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Value "0" -Type String
