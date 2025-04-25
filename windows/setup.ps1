@@ -27,9 +27,10 @@ function ApplySystemTweaks {
 
 
 	    Set-Culture -CultureInfo "de-DE"
-	    Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "LocaleName" -Value "de-DE"
-	    Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "GeoName" -Value "DE"
+	    Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "LocaleName" -Value "en-US"
+	    Set-ItemProperty -Path "HKCU:\Control Panel\International" -Name "GeoName" -Value "US"
 	    Set-TimeZone -Id "W. Europe Standard Time"
+		Set-WinHomeLocation -GeoId 94
 
 	    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name "EnableTransparency" -Value 0
 	    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop\WindowMetrics" -Name "MinAnimate" -Value "0" -Type String
