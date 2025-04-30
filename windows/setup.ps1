@@ -90,6 +90,7 @@ $programs = @(
 		"Node.js.LTS"
 		"Discord.Discord"
 		"Brave.Brave"
+		"Insomnia.Insomnia"
 "anki.anki"
 "RARLab.WinRAR"                
 "Python.Python.3"            

@@ -12,6 +12,7 @@
 Set-Alias nf neofetch
 Set-Alias n nvim
 Set-Alias vim nvim
+
 Function admin { Start-Process powershell -Verb runAs }
 Function edit { nvim $HOME/.dotfiles/windows/setup.ps1 }
 Function u { & $HOME/.dotfiles/windows/setup.ps1 }
