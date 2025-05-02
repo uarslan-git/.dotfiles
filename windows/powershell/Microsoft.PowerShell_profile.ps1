@@ -1,12 +1,14 @@
 #Import-Module -Name Terminal-Icons
-#Import-Module -Name Posh-Git
+Import-Module -Name Posh-Git
 #Import-Module -Name PSReadline
-#oh-my-posh --init --shell pwsh --config $env:POSH_THEMES_PATH/jandedobbeleer.omp.json | Invoke-#Expression
+oh-my-posh --init --shell pwsh --config $env:POSH_THEMES_PATH/jandedobbeleer.omp.json | Invoke-Expression
 
 #Set-PSReadLineOption -PredictionSource History
 #Set-PSReadLineOption -PredictionViewStyle ListView
 #Set-PSReadLineOption -EditMode Windows
 #Set-PSReadLineOption -BellStyle None  # Disable beep
+
+#git -C $HOME\.dotfiles\ pull origin
 
 # Aliases
 Set-Alias nf neofetch
