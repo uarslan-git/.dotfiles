@@ -79,27 +79,46 @@ setup_dev() {
 if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
     setup_dev
 fi
+bindkey -s ^f "tmux-sessionizer\n"
 
-# Aliases
-alias dfs="cd ~/.dotfiles"
-alias backup="pushd ~/.dotfiles; ga *; gcd; gp; popd"
+systemctl --user import-environment 2> /dev/null
+
+alias backup="pushd ~/; dconf-save; ga -u; gcd; gp; popd"
 alias cal="cal -wm"
+alias chrome="google-chrome-stable"
+alias dconf-load="pushd ~/.config; dconf load / < dconf-settings; popd"
+alias dconf-reset="dconf reset -f /"
+alias dconf-save="pushd ~/.config; dconf dump / > dconf-settings; popd"
+alias edit="vim ~/config/PKGBUILD"
 alias ga="git add"
 alias gb="git branch -a"
 alias gc="git commit -m"
 alias gcd="git commit -m '$(date)'"
 alias gco="git checkout"
 alias gl="git log --graph --pretty=oneline --abbrev-commit"
+alias gls="git ls-files"
+alias glu="git ls-files --others --exclude-standard"
+alias glsf="git ls-files | awk -F'/' '{print \$1}' | sort | uniq"
+alias gluf="git ls-files --others --exclude-standard | awk -F'/' '{print \$1}' | sort | uniq"
 alias gp="git push"
 alias gs="git status"
 alias ra="ranger"
+alias ra="ranger"
+alias rb="backup; reboot"
+alias sd="backup; shutdown now"
+alias sudo="sudo "
+alias update="pushd ~/config; PACMAN='paru' PACMAN_AUTH='eval' makepkg -fsi; popd"
+alias udr="pushd ~/config; PACMAN='paru' PACMAN_AUTH='eval' makepkg -fsi --noconfirm; systemctl daemon-reload && systemctl --user daemon-reload && systemctl preset-all; popd"
 alias vi="nvim"
 alias vim="nvim"
+alias nc="--noconfirm"
 alias zshrc="vim ~/.zshrc"
+alias rs="systemctl --user restart i3-session.target"
+alias xclip="xclip -sel c"
 alias n="nvim"
 alias t="tmux"
-alias edit="vim ~/.zshrc"
-alias u="setup_dev"
+alias zsh="vim ~/.zshrc"
+alias a="ani-cli"
 
 # Fix Powerlevel10k instant prompt warning
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
