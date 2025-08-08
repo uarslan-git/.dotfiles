@@ -84,7 +84,6 @@ $programs = @(
 		"MartinFinnerup.YouTubeMusicforDesktop"
 		"XP8K2L36VP0QMB"
 		"OpenJS.NodeJS"
-		"CondaForge.Miniforge3"
 		"Notion.Notion"
 		"GitHub.cli"
 		"Node.js.LTS"
